@@ -2,28 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <meta name="theme-color" content="#007aff">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>Wallpaper</title>
     <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
     <main class="chat-container" role="main">
         <header class="chat-header">
-            <div class="avatar"></div>
-            <div class="info"></div>
+            <div class="bot-avatar" aria-hidden="true">
+                <div class="bot-avatar">S</div>
+            </div>
+            <div class="bot-info">
+                <h1>Sys</h1>
+                <span>Active</span>
+            </div>
+            <!-- <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme"></button> -->
         </header>
-        <section class="chat-messages" id="messages" aria-live="polite">
 
+        <section id="messages" class="chat-messages" aria-live="polite">
+            <div id="welcome" class="welcome-screen">
+                <div class="welcome-avatar">S</div>
+                <h2 class="welcome-title">Master!</h2>
+                <p class="welcome-subtitle">system online at 100%, what should we do now, Master?</p>
+                <div class="suggestion-chips">
+                    <button class="suggestion-chip" type="button" data-text="/tictactoe">tictactoe</button>
+                    <button class="suggestion-chip" type="button" data-text="/wordle">wordle</button>
+                    <button class="suggestion-chip" type="button" data-text="/sudoku">sudoku</button>
+                    <button class="suggestion-chip" type="button" data-text="/help">option</button>
+                </div>
+            </div>
+            <div id="typing" class="typing-indicator" aria-hidden="true">
+                <div class="typing-dots"><span></span><span></span><span></span></div>
+            </div>
         </section>
+
         <footer class="chat-input-area">
             <form id="composer" class="input-wrapper" autocomplete="off">
-                <textarea 
-                id="input"
-                class="input-field"
-                placeholder="message"
-                rows="1"
-                aria-label="Message"
-                ></textarea>
+                <textarea
+                    id="input"
+                    class="input-field"
+                    placeholder="Type a message…"
+                    rows="1"
+                    aria-label="Message"></textarea>
                 <button id="send" class="send-btn" type="submit" aria-label="Send">
                     <svg width="20" height="20" viewbox="0 0 40 40" fill="none">
                         <path
@@ -38,14 +63,14 @@
                         L29.85 36.92
                         C31.48 37.6 33.25 36.58 33.55 34.82
                         L39.72 0.85Z
-    
+
                         M13.05 27.85
                         L33.65 8.15
                         L17.2 29.25
                         L13.05 34.45
                         V27.85Z"
-    
-                        fill="black"
+
+                        fill="white"
                         />
                     </svg>
                 </button>
@@ -53,6 +78,8 @@
         </footer>
     </main>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
+    <script>
+    </script>
 </body>
 </html>
