@@ -1,0 +1,35 @@
+
+:root{
+    --var-background: gray;
+}
+
+body{
+    max-height : 700px;
+    max-width: auto;
+    height : 670px ;
+    background-color: var(--var-background);
+    display: grid;
+    place-items: center;
+    
+}
+*{
+    box-sizing:border-box;
+    margin: 0;
+    padding: 0;
+    border-radius:12px;
+}
+.container{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height : 400px;
+    width: 230px;
+    gap:20px;
+    padding:40px;
+    background-color: beige;
+}
+.box{
+    display: flex;
+    padding:10px;
+    background-color: aquamarine;
+}
