@@ -7,10 +7,52 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="box"></div>
-        <div class="box"></div>
-    </div>
+    <main class="chat-container" role="main">
+        <header class="chat-header">
+            <div class="avatar"></div>
+            <div class="info"></div>
+        </header>
+        <section class="chat-messages" id="messages" aria-live="polite">
+
+        </section>
+        <footer class="chat-input-area">
+            <form id="composer" class="input-wrapper" autocomplete="off">
+                <textarea 
+                id="input"
+                class="input-field"
+                placeholder="message"
+                rows="1"
+                aria-label="Message"
+                ></textarea>
+                <button id="send" class="send-btn" type="submit" aria-label="Send">
+                    <svg width="20" height="20" viewbox="0 0 40 40" fill="none">
+                        <path
+                        d="M39.72 0.85
+                        C39.88 -0.05 38.92 -0.57 38.15 -0.12
+                        L1.15 21.55
+                        C-0.55 22.55 -0.32 25.02 1.52 25.7
+                        L10.05 29.02
+                        L10.05 38.22
+                        C10.05 40.3 12.7 41.15 14 39.5
+                        L19.45 32.62
+                        L29.85 36.92
+                        C31.48 37.6 33.25 36.58 33.55 34.82
+                        L39.72 0.85Z
+    
+                        M13.05 27.85
+                        L33.65 8.15
+                        L17.2 29.25
+                        L13.05 34.45
+                        V27.85Z"
+    
+                        fill="black"
+                        />
+                    </svg>
+                </button>
+            </form>
+        </footer>
+    </main>
+
     <script src="script.js"></script>
 </body>
 </html>

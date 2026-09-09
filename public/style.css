@@ -1,35 +1,73 @@
 
-:root{
-    --var-background: gray;
-}
-
-body{
-    max-height : 700px;
-    max-width: auto;
-    height : 670px ;
-    background-color: var(--var-background);
-    display: grid;
-    place-items: center;
-    
-}
 *{
     box-sizing:border-box;
     margin: 0;
     padding: 0;
-    border-radius:12px;
 }
-.container{
-    display:flex;
-    justify-content: center;
+
+:root{
+    --background: linear-gradient(160deg, black 0%, rgb(49, 20, 49) 60%,rgb(255, 65, 192) 100% );
+    --text-primary: white;
+    --glass-background: rgba(255,255,255, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --shadow-soft: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+body{
+    height : 100vh ;
+    background: var(--background);
+    background-attachment: fixed;
+    display: grid;
     align-items: center;
-    height : 400px;
-    width: 230px;
-    gap:20px;
-    padding:40px;
-    background-color: beige;
+    justify-content: center;
+    overflow: hidden;
+    
 }
-.box{
+
+.chat-container{
+    width:95%;
+    max-width:500px;
+    height:85vh;
+    background: var(--glass-background);
+    backdrop-filter: blur(10px);
+    --webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    box-shadow: var(--shadow-soft);
     display: flex;
-    padding:10px;
-    background-color: aquamarine;
+    flex-direction: column;
+    position: relative;
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from { opacity:0; transform: translateY(20px);}
+    to { opacity:1; transform: translateY(0);}
+}
+
+.chat-header{
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid rgba(0,0,0,0.6);
+    background: var(--glass-border);
+    border-radius: 24px 24px 0 0;
+}
+
+.chat-messages{
+    display: flex;
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    gap: 16px;
+    flex-direction: column;
+    scrollbar-width: thin;
+}
+
+.chat-input-area{
+    padding: 20px;
+    background: var(--glass-background);
+    border-top: 1px solid rgba(0,0,0,0.05);
+    border-radius: 0 0 24px 24px;
 }
