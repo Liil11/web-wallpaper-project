@@ -95,6 +95,7 @@ export const addTictactoe = (sys)=>{
                 turn = false;
                 checkWinner();
             } else {
+                //create opponent submit response
                 box.innerText = 'X';
                 box.disabled = true;
                 turn = true;
