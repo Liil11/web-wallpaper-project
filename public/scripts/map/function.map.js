@@ -4,7 +4,7 @@ import { addTictactoe } from "../utils/tictactoe.util.js";
 const functionMap ={
     time: function(){return time()},
     hello: function(){return 'Hello World';},
-    tictactoe: function(){ addTictactoe(); return 'tictactoe-start'}
+    tictactoe: function(){ addTictactoe(); return 'tictactoe-start'},
 }
-
+//tambahin wordle
 export { functionMap};
