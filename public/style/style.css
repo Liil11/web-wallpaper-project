@@ -130,6 +130,7 @@ body{
 .message-avatar{
     height: 28px;
     width: 28px;
+    min-width: 28px;
     border-radius: 50%;
     display:flex;
     align-items: center;
@@ -138,6 +139,7 @@ body{
 }
 
 .message.user .message-time { text-align: right; }
+
 
 .chat-input-area{
     padding: 20px;
@@ -260,28 +262,81 @@ body{
 .send-btn:hover{
     transform: scale(1.5s);
 }
+
 .typing-dots span{
     display: inline-block;
     width: 12px;
     height: 12px;
+    background: #ff2c2c;
     border-radius: 50%;
-    color: red;
-    margin-right: 1%;
-    animation: pulse 1.5 infinite ease-in-out;
+    margin-right:1%;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+.typing-indicator {
+    display: none;
+    padding: 10px 20px;
+    font-size: 13px;
+    color: var(--text-muted);
+    font-style: italic;
 }
 
-@keyframes pulse{
+.typing-indicator.show {
+    display: block;
+}
+.typing-indicator span:nth-child(1) {
+    animation-delay:0s;
+}
+.typing-indicator span:nth-child(2) {
+    animation-delay:0.2s;
+}
+.typing-indicator span:nth-child(3) {
+    animation-delay:0.4s;
+}
+
+@keyframes pulse {
     0% { opacity: 0.5;}
-    50% { opacity: 1;}
-    100% { opacity: 0.5;}
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
     0%,60%,100%{
-        transform: translateY(0)
+        transform: translateY(0);
     }
     30%{
-        transform: translateY(-0.6px);
+        transform: translateY(-6px);
     }
 }
 
+
+/*tictactoe board
+*/
+.tictactoe-container{
+    display: grid;
+    grid-template-columns: repeat(3, 48px);
+    grid-template-rows: repeat(3, 48px);
+    gap: 2%;
+    margin: 2% auto;
+    width: max-content;
+}
+.box{
+    border-radius: 30%;
+    cursor: pointer;
+    background: white;
+    border: 2px solid #333333;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.box:hover{
+    background: #ff2c2c;
+    transition:ease-in;
+    border: 5px grey;
+
+}
+
+/* hidden */
 .hidden{
-    display: none;
+    display:none;
 }

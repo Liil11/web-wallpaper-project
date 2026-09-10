@@ -1,4 +1,6 @@
-/* FAQ Chatbot — client UI logic */
+
+import { functionMap } from "./map/function.map.js";
+import { updateClock } from "./utils/time.util.js";
 (() => {
     'use strict';
 
@@ -9,13 +11,16 @@
     const formEl      = document.getElementById('composer');
     const inputEl     = document.getElementById('input');
     const sendBtn     = document.getElementById('send');
-    
+    let tictacTurn = true;
+    updateClock();
+    setInterval(updateClock,1000);
 
     // Demo mode flag - set to false to use real API
-    const DEMO_MODE = true
+    const DEMO_MODE = false;
+    let prodMode = true;
 
     // Fake responses for demo mode
-    const FAKE_RESPONSES = [
+    const RESPONSES = [
         'I received your question.',
         'Thanks for asking! That\'s a great question.',
         'Let me help you with that.',
@@ -76,7 +81,7 @@
     }
 
     const setTyping = (on)=>{
-        if (!typingEl) return;
+        if (!typingEl) return ;
         typingEl.classList.toggle('show', !!on);
         if (on) messagesEl.scrollTop = messagesEl.scrollHeight;
     }
@@ -88,11 +93,11 @@
     }
 
     const getResponse = ()=>{
-        const idx = Math.floor(Math.random() * FAKE_RESPONSES.length);
-        return FAKE_RESPONSES[idx];
+        const idx = Math.floor(Math.random() * RESPONSES.length);
+        return RESPONSES[idx];
     }
 
-    const askBot = async (message)=>{
+    const sysRes = async (message)=>{
         if (DEMO_MODE) {
             // Simulate delay and return fake response
             if (message.toLowerCase().includes("this is sparta")){
@@ -102,11 +107,22 @@
             await new Promise(resolve => setTimeout(resolve, 3000));
             return getResponse();
         }
-        try {
-            return 'lol! You haven\'t got this feature yet!';
-        } catch (err) {
-            return `Sorry, something went wrong: ${err.message}`;
+
+
+        if(message.toLowerCase().startsWith('/')){
+            await new Promise(resolve => setTimeout(resolve, 3000));
+            const query = message.toLowerCase().slice(1);
+            try {
+                if(functionMap[query]){
+                    return functionMap[query]();
+                } else {
+                    return `${query} is not a Function Fool!`
+                }
+            } catch (error) {
+                return error.message;
+            }
         }
+        return 'have a good day!';
     }
 
     //clear chat after interval
@@ -131,7 +147,7 @@
         disableInput(true);
         setTyping(true);
 
-        const answer = await askBot(trimmed);
+        const answer = await sysRes(trimmed);
 
         setTyping(false);
         addMessage('bot', answer);
@@ -159,6 +175,7 @@
         }
         });
 
+
     // Auto-grow textarea
     inputEl.addEventListener('input', () => {
         inputEl.style.height = 'auto';
@@ -170,10 +187,10 @@
             formEl.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
         }
     });
+   
 
     // Friendly initial state
     if (welcomeEl) welcomeEl.classList.remove('hidden');
     inputEl.focus();
-
     
 })();
