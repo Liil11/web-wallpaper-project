@@ -37,6 +37,12 @@
                     <button class="suggestion-chip" type="button" data-text="/help">option</button>
                 </div>
             </div>
+            <div class="popup" id="popup">
+                <button class="suggestion-chip" type="button" data-text="/tictactoe">tictactoe</button>
+                <button class="suggestion-chip" type="button" data-text="/wordle">wordle</button>
+                <button class="suggestion-chip" type="button" data-text="/sudoku">sudoku</button>
+                <button class="suggestion-chip" type="button" data-text="/help">option</button>
+            </div>
             <div id="typing" class="typing-indicator" aria-hidden="true">
                 <div class="typing-dots"><span></span><span></span><span></span></div>
             </div>
@@ -44,6 +50,7 @@
 
         <footer class="chat-input-area">
             <form id="composer" class="input-wrapper" autocomplete="off">
+                <button id="option-btn" class="option-buttion" aria-label="option">No Bitches?</button>
                 <textarea
                     id="input"
                     class="input-field"

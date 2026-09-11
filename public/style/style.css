@@ -68,7 +68,10 @@ body{
     background: var(--glass-border);
     border-radius: 24px 24px 0 0;
 }
-
+#clock{
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
 .chat-messages{
     display: flex;
     flex: 1;
@@ -272,6 +275,7 @@ body{
     margin-right:1%;
     animation: pulse 1.5s infinite ease-in-out;
 }
+
 .typing-indicator {
     display: none;
     padding: 10px 20px;
@@ -305,6 +309,18 @@ body{
     }
 }
 
+.popup{
+    display:none;
+    background: #333333;
+    max-width: 480px;
+    width :fit-content;
+    height: 20vh;
+    border-radius: 20px;
+    animation: slideUp 0.5s ease-out;
+}
+.popup.show{
+    display: flex;
+}
 
 /*tictactoe board
 */
