@@ -340,3 +340,70 @@ body{
 .hidden{
     display:none;
 }
+
+.wordle-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    margin-top: 6px;
+}
+
+.wordle-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.wordle-row {
+    display: flex;
+    gap: 4px;
+}
+
+.tile {
+    width: 32px;
+    height: 32px;
+    border: 2px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    border-radius: 4px;
+}
+
+/* Keyboard Virtual */
+.wordle-keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+}
+
+.kb-row {
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+}
+
+.key {
+    background: #d3d6da;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 6px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.key.wide {
+    padding: 8px 10px;
+    font-size: 0.7rem;
+}
+
+/* Status Warna */
+.correct { background-color: #6aaa64 !important; color: white; border-color: #6aaa64; }
+.present { background-color: #c9b458 !important; color: white; border-color: #c9b458; }
+.absent  { background-color: #787c7e !important; color: white; border-color: #787c7e; }
