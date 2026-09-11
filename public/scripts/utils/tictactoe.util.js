@@ -1,5 +1,5 @@
 //html var
-
+const popupEl = document.getElementById('popup')
 
 //time
 const nowTime= ()=>{
@@ -34,6 +34,7 @@ const addmessage = (content)=>{
             messagesEl.insertBefore(wrap,typingEl);
     } else {
             messagesEl.append(wrap, typingEl);
+            messagesEl.append(popupEl);
     }
     messagesEl.scrollTop = messagesEl.scrollHeight;
 }
@@ -70,9 +71,9 @@ export const addTictactoe = (sys)=>{
     wrap.appendChild(time);
 
     if (typingEl && typingEl.classList.contains('show')) {
-            messagesEl.insertBefore(wrap,typingEl);
+        messagesEl.insertBefore(wrap,typingEl);
     } else {
-            messagesEl.append(wrap, typingEl);
+        messagesEl.append(wrap, typingEl);
     }
     messagesEl.scrollTop = messagesEl.scrollHeight;
     const winPatterns = [

@@ -76,10 +76,10 @@ import { updateClock } from "./utils/time.util.js";
 
         // Insert messages before typing indicator so typing appears at bottom
         if (typingEl && typingEl.classList.contains('show')) {
-            messagesEl.insertBefore(wrap,typingEl);
+            messagesEl.insertBefore(wrap,popupEl);
         } else {;
-            messagesEl.append(wrap, popupEl)
-            messagesEl.append(wrap, typingEl);
+            messagesEl.append(wrap, typingEl );
+            messagesEl.append(popupEl);
         }
         messagesEl.scrollTop = messagesEl.scrollHeight;
     }
