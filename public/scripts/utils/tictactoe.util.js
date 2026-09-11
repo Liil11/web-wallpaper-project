@@ -90,16 +90,12 @@ export const addTictactoe = (sys)=>{
     t.forEach((box)=>{
         box.addEventListener('click', ()=>{
             if(turn){
+                box.style.color = '#08519C'
                 box.innerText = 'O';
                 box.disabled = true;
                 turn = false;
                 checkWinner();
-            } else {
-                //create opponent submit response
-                box.innerText = 'X';
-                box.disabled = true;
-                turn = true;
-                checkWinner();
+                opponentMoves();
             }
         })
     })
@@ -117,7 +113,6 @@ export const addTictactoe = (sys)=>{
 
             if (pos1Val !== "" && pos2Val!=="" && pos3Val!=="" 
                 && pos1Val === pos2Val && pos2Val === pos3Val) {
-                console.log(pos1Val + ' is a Winner');
                 hasWin = true;
                 disableBoxes();
                 addmessage(`Congratulations! ${pos1Val} is a Winner!`);
@@ -131,7 +126,69 @@ export const addTictactoe = (sys)=>{
                 addmessage(`That's it's folks, what a close match!`);
             }
         }
-    };
         
+    };
+    const opponentMoves = async ()=>{
+        const box = Array.from(document.querySelectorAll('.box'));
+        const emptyBox = box.filter(box => !box.disabled);
+
+        if(emptyBox === 0 ) return;
+
+        const typing = document.getElementById('typing');
+        typing.classList.toggle('show', true)
+        await new Promise(resolve => setTimeout(resolve, 1000))
+        typing.classList.toggle('show', false)
+        let choice;
+
+        choice = getW('X', box);
+
+        if(!choice){
+            choice = getW('O', box);
+        }
+
+        if(!choice){
+            const center = box[4];
+            if(!center.disabled){
+                choice = center;
+            }
+        }
+
+        if(!choice){
+            const corner = [box[0],box[2],box[6],box[8]].filter(box => !box.disabled);
+            if(corner.length > 0){
+                choice = corner[Math.floor(Math.random()*corner.length)];   
+            }
+        }
+
+        if(!choice){
+            choice = emptyBox[Math.floor(Math.random()*emptyBox.length)];
+        }
+        
+        if(choice != undefined){
+            choice.textContent = 'X';
+            choice.style.color = '#FA003F'
+            choice.disabled = true;
+            checkWinner();
+            turn = true;
+        }
+    }
+     const getW = (side, boxes)=>{
+        for (let combo of winPatterns){
+            const [a,b,c] = combo;
+            const values = [
+                boxes[a].textContent,
+                boxes[b].textContent,
+                boxes[c].textContent
+            ]
+            if (values.filter(value => value === side ).length === 2 && values.includes('')){
+                const emptyBoxes = combo[
+                    values.findIndex(value => value === '')
+                ];
+
+                return boxes[emptyBoxes];
+            }
+        }
+        return;
+    }   
     
 }
