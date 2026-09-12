@@ -15,7 +15,7 @@ import { firstGreeting, updateClock } from "./utils/time.util.js";
     const refreshBtn = document.getElementById('option-btn');
     const popupEl = document.getElementById('popup');
 
-    firstGreeting()
+    firstGreeting();
     updateClock();
     setInterval(updateClock,1000);
 
