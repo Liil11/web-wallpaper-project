@@ -39,8 +39,7 @@ body{
 }
 
 .chat-container{
-    max-width:500px;
-    width:500px;
+    width:80vh;
     height:85vh;
     background: var(--glass-background);
     backdrop-filter: blur(10px);
@@ -188,8 +187,9 @@ body{
 }
 
 .welcome-title {
+    margin-top: 10%;
     font-size: 24px;
-    font-weight: 800;
+    font-weight: 500;
     color: var(--text-main);
 }
 
