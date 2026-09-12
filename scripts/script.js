@@ -1,6 +1,6 @@
 
 import { functionMap } from "./map/function.map.js";
-import { updateClock } from "./utils/time.util.js";
+import { firstGreeting, updateClock } from "./utils/time.util.js";
 (() => {
     'use strict';
 
@@ -15,6 +15,7 @@ import { updateClock } from "./utils/time.util.js";
     const refreshBtn = document.getElementById('option-btn');
     const popupEl = document.getElementById('popup');
 
+    firstGreeting()
     updateClock();
     setInterval(updateClock,1000);
 

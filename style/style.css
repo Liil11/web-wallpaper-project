@@ -321,6 +321,17 @@ body{
     display: flex;
 }
 
+.option-button{
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    justify-content: center;
+    padding:2px;
+    margin-right: 1%;
+    background: var(--background);
+    color: white;
+    border-color: white;
+}
 /*tictactoe board
 */
 .tictactoe-container{
