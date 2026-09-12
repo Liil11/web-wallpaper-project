@@ -1,6 +1,6 @@
 
 import { functionMap } from "./map/function.map.js";
-import { updateClock } from "./utils/time.util.js";
+import { firstGreeting, updateClock } from "./utils/time.util.js";
 (() => {
     'use strict';
 
@@ -11,7 +11,11 @@ import { updateClock } from "./utils/time.util.js";
     const formEl      = document.getElementById('composer');
     const inputEl     = document.getElementById('input');
     const sendBtn     = document.getElementById('send');
-    let tictacTurn = true;
+    //maybe we don't need it, maybe we need,idk
+    const refreshBtn = document.getElementById('option-btn');
+    const popupEl = document.getElementById('popup');
+
+    firstGreeting()
     updateClock();
     setInterval(updateClock,1000);
 
@@ -73,9 +77,10 @@ import { updateClock } from "./utils/time.util.js";
 
         // Insert messages before typing indicator so typing appears at bottom
         if (typingEl && typingEl.classList.contains('show')) {
-            messagesEl.insertBefore(wrap,typingEl);
-        } else {
-            messagesEl.append(wrap, typingEl);
+            messagesEl.insertBefore(wrap,popupEl);
+        } else {;
+            messagesEl.append(wrap, typingEl );
+            messagesEl.append(popupEl);
         }
         messagesEl.scrollTop = messagesEl.scrollHeight;
     }
@@ -98,19 +103,17 @@ import { updateClock } from "./utils/time.util.js";
     }
 
     const sysRes = async (message)=>{
+        await new Promise(resolve => setTimeout(resolve, 3000));
         if (DEMO_MODE) {
             // Simulate delay and return fake response
             if (message.toLowerCase().includes("this is sparta")){
-                await new Promise(resolve => setTimeout(resolve, 3000));
                 return "Zeus!, Your Son Has Return!";
             }
-            await new Promise(resolve => setTimeout(resolve, 3000));
             return getResponse();
         }
 
 
         if(message.toLowerCase().startsWith('/')){
-            await new Promise(resolve => setTimeout(resolve, 3000));
             const query = message.toLowerCase().slice(1);
             try {
                 if(functionMap[query]){
@@ -187,8 +190,12 @@ import { updateClock } from "./utils/time.util.js";
             formEl.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
         }
     });
-   
 
+    //malah buat ini aku jir
+    //popupmenu
+    refreshBtn.addEventListener('click',()=>{
+       popupEl.classList.toggle('show');
+    })
     // Friendly initial state
     if (welcomeEl) welcomeEl.classList.remove('hidden');
     inputEl.focus();
