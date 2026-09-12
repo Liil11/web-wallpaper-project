@@ -195,6 +195,7 @@ import { firstGreeting, updateClock } from "./utils/time.util.js";
     //popupmenu
     refreshBtn.addEventListener('click',()=>{
        popupEl.classList.toggle('show');
+       messagesEl.scrollTop = messagesEl.scrollHeight;
     })
     // Friendly initial state
     if (welcomeEl) welcomeEl.classList.remove('hidden');

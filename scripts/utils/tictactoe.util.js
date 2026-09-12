@@ -41,8 +41,7 @@ const addmessage = (content)=>{
 
 export const addTictactoe = (sys)=>{
     if(document.querySelector('.tictactoe-container')){
-        const tContainer = document.querySelector('.tictactoe-container');
-        tContainer.remove();
+        document.querySelector('.tictactoe-container').remove();
     }
     const typingEl = document.getElementById('typing');
     const messagesEl = document.getElementById('messages');
@@ -95,8 +94,9 @@ export const addTictactoe = (sys)=>{
                 box.innerText = 'O';
                 box.disabled = true;
                 turn = false;
-                checkWinner();
-                opponentMoves();
+                if (checkWinner() != true){
+                    opponentMoves();
+                }
             }
         })
     })
@@ -117,7 +117,7 @@ export const addTictactoe = (sys)=>{
                 hasWin = true;
                 disableBoxes();
                 addmessage(`Congratulations! ${pos1Val} is a Winner!`);
-                return;
+                return true;
             }
         }
 
@@ -125,6 +125,7 @@ export const addTictactoe = (sys)=>{
             const allBoxes = [...t].every((box) => box.innerText !== "");
             if (allBoxes) {
                 addmessage(`That's it's folks, what a close match!`);
+                return true;
             }
         }
         
@@ -132,12 +133,13 @@ export const addTictactoe = (sys)=>{
     const opponentMoves = async ()=>{
         const box = Array.from(document.querySelectorAll('.box'));
         const emptyBox = box.filter(box => !box.disabled);
-
+        
         if(emptyBox === 0 ) return;
 
         const typing = document.getElementById('typing');
         typing.classList.toggle('show', true)
-        await new Promise(resolve => setTimeout(resolve, 1000))
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+        await new Promise(resolve => setTimeout(resolve, 500))
         typing.classList.toggle('show', false)
         let choice;
 
