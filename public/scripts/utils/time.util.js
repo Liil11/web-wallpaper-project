@@ -11,7 +11,7 @@ const monthofYear = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Se
 export const updateClock=()=>{
     const d = time();
     const date = String(d.getDate());
-    const month = monthofYear[d.getMonth()-1];
+    const month = monthofYear[d.getMonth()];
     const day = dayofWeek[d.getDay()-1]
     const hours = String(d.getHours()).padStart(2,'0');
     const minutes = String(d.getMinutes()).padStart(2,'0');
