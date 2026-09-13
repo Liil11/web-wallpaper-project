@@ -60,7 +60,8 @@ body{
 }
 
 .chat-container{
-    width:300px;
+    max-width:500px;
+    width : 40vw;
     height:85vh;
     background: var(--glass-background);
     backdrop-filter: blur(10px);
