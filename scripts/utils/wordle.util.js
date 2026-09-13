@@ -72,7 +72,7 @@ import  { nowTime }  from './time.util.js';
 
     const nytUrl = `https://www.nytimes.com/svc/wordle/v2/${todayStr}.json`;
     const proxyUrl = `https://proxy.corsfix.com/?url=${encodeURIComponent(nytUrl)}`;
-
+    console.log(todayStr);
     try {
         const res = await fetch(proxyUrl);
         if (res.ok) {
