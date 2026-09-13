@@ -144,8 +144,24 @@ import { addMessage } from "./utils/syschat.util.js";
        popupEl.classList.toggle('show');
        messagesEl.scrollTop = messagesEl.scrollHeight;
     })
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const body = document.body;
+            if (body.classList.contains('theme-dark')) {
+                body.classList.replace('theme-dark', 'theme-light');
+            } else if (body.classList.contains('theme-light')) {
+                body.classList.replace('theme-light', 'theme-dark');
+            } else {
+                body.classList.add('theme-dark');
+            }
+        });
+    }
+
+    // Set default theme on load
+    document.body.classList.add('theme-dark');
+
     // Friendly initial state
     if (welcomeEl) welcomeEl.classList.remove('hidden');
     inputEl.focus();
-    
-})();

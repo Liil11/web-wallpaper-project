@@ -13,18 +13,39 @@
     padding: 0;
 }
 
-:root{
-    --background: linear-gradient(160deg, black 0%, rgb(49, 20, 49) 60%,rgb(255, 65, 192) 100% );
-    --primary-gradient: linear-gradient(130deg, pink 0%, magenta 60%,purple 100%);
+:root {
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 12px;
+    --shadow-soft: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+/* Dark/Purple Theme (Original) */
+body.theme-dark {
+    --background: linear-gradient(160deg, black 0%, rgb(49, 20, 49) 60%, rgb(255, 65, 192) 100%);
+    --primary-gradient: linear-gradient(130deg, pink 0%, magenta 60%, purple 100%);
     --user-bubble: magenta;
     --bot-bubble: rgba(255,255,255,0.67);
     --text-primary: white;
     --glass-background: rgba(255,255,255, 0.85);
     --glass-border: rgba(255, 255, 255, 0.5);
-    --shadow-soft: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
     --accent-color: pink;
     --text-main: black;
     --text-muted: rgba(165, 12, 120, 0.523);
+}
+
+/* Light/Ocean Theme (New) */
+body.theme-light {
+    --background: linear-gradient(160deg, #e0f2f1 0%, #b2ebf2 60%, #80deea 100%);
+    --primary-gradient: linear-gradient(130deg, #4db6ac 0%, #00acc1 60%, #00838f 100%);
+    --user-bubble: #00acc1;
+    --bot-bubble: rgba(255,255,255,0.9);
+    --text-primary: #006064;
+    --glass-background: rgba(255,255,255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.8);
+    --accent-color: #00acc1;
+    --text-main: #004d40;
+    --text-muted: rgba(0, 77, 64, 0.6);
 }
 
 body{
@@ -35,7 +56,7 @@ body{
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    
+    transition: background 0.3s ease;
 }
 
 .chat-container{
