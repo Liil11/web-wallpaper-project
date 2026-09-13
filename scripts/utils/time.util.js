@@ -5,6 +5,12 @@ export const time = ()=>{
     return d;   
 }
 
+export const nowTime= ()=>{
+        const h = String(time().getHours()).padStart(2, '0');
+        const m = String(time().getMinutes()).padStart(2, '0');
+        return `${h}:${m}`;
+    }
+
 const dayofWeek = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
 const monthofYear = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
@@ -40,6 +46,5 @@ export const firstGreeting = ()=>{
     else {
         greeting = `You should sleep soon Master, Late Night activity is not good for your body!`;
     }
-    console.log(d)
     document.querySelector('.welcome-subtitle').textContent = greeting;
 }

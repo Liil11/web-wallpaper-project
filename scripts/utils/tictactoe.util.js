@@ -1,48 +1,13 @@
+import { addMessage } from './syschat.util.js';
+import {nowTime}  from './time.util.js';
 //html var
 const popupEl = document.getElementById('popup')
 
 //time
-const nowTime= ()=>{
-        const d = new Date();
-        const h = String(d.getHours()).padStart(2, '0');
-        const m = String(d.getMinutes()).padStart(2, '0');
-        return `${h}:${m}`;
-    }
-
-const addmessage = (content)=>{
-    const typingEl = document.getElementById('typing');
-    const messagesEl = document.getElementById('messages');
-    
-    const wrap = document.createElement('div');
-    wrap.className = 'message bot';
-    
-    const avatar = document.createElement('div');
-    avatar.className = 'message-avatar';
-    avatar.textContent = 'S';
-    
-    const bubble = document.createElement('div');
-    bubble.className = 'message-bubble';
-    bubble.innerText = `${content}`;
-    const time = document.createElement('div')
-    time.className = 'message-time'
-    time.textContent = nowTime(); 
-    wrap.appendChild(avatar);
-    wrap.appendChild(bubble);
-    wrap.appendChild(time);
-    
-    if (typingEl && typingEl.classList.contains('show')) {
-            messagesEl.insertBefore(wrap,typingEl);
-    } else {
-            messagesEl.append(wrap, typingEl);
-            messagesEl.append(popupEl);
-    }
-    messagesEl.scrollTop = messagesEl.scrollHeight;
-}
 
 export const addTictactoe = (sys)=>{
     if(document.querySelector('.tictactoe-container')){
-        const tContainer = document.querySelector('.tictactoe-container');
-        tContainer.remove();
+        document.querySelector('.tictactoe-container').remove();
     }
     const typingEl = document.getElementById('typing');
     const messagesEl = document.getElementById('messages');
@@ -95,8 +60,9 @@ export const addTictactoe = (sys)=>{
                 box.innerText = 'O';
                 box.disabled = true;
                 turn = false;
-                checkWinner();
-                opponentMoves();
+                if (checkWinner() != true){
+                    opponentMoves();
+                }
             }
         })
     })
@@ -116,15 +82,16 @@ export const addTictactoe = (sys)=>{
                 && pos1Val === pos2Val && pos2Val === pos3Val) {
                 hasWin = true;
                 disableBoxes();
-                addmessage(`Congratulations! ${pos1Val} is a Winner!`);
-                return;
+                addMessage('bot',`Congratulations! ${pos1Val} is a Winner!`);
+                return true;
             }
         }
 
         if (!hasWin) {
             const allBoxes = [...t].every((box) => box.innerText !== "");
             if (allBoxes) {
-                addmessage(`That's it's folks, what a close match!`);
+                addMessage('bot',`That's it's folks, what a close match!`);
+                return true;
             }
         }
         
@@ -132,12 +99,13 @@ export const addTictactoe = (sys)=>{
     const opponentMoves = async ()=>{
         const box = Array.from(document.querySelectorAll('.box'));
         const emptyBox = box.filter(box => !box.disabled);
-
+        
         if(emptyBox === 0 ) return;
 
         const typing = document.getElementById('typing');
         typing.classList.toggle('show', true)
-        await new Promise(resolve => setTimeout(resolve, 1000))
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+        await new Promise(resolve => setTimeout(resolve, 500))
         typing.classList.toggle('show', false)
         let choice;
 
