@@ -165,3 +165,4 @@ import { addMessage } from "./utils/syschat.util.js";
     // Friendly initial state
     if (welcomeEl) welcomeEl.classList.remove('hidden');
     inputEl.focus();
+});
