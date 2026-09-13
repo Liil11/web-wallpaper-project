@@ -1,6 +1,7 @@
 
 import { functionMap } from "./map/function.map.js";
-import { firstGreeting, updateClock } from "./utils/time.util.js";
+import { firstGreeting, updateClock, nowTime } from "./utils/time.util.js";
+import { addMessage } from "./utils/syschat.util.js";
 (() => {
     'use strict';
 
@@ -30,60 +31,6 @@ import { firstGreeting, updateClock } from "./utils/time.util.js";
         'Let me help you with that.',
         'I\'m here to assist you.'
     ];
-
-    function escapeHtml(s) {
-        return String(s)
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#39;');
-    }
-    //const d=date h=hours m=minutes
-    const nowTime= ()=>{
-        const d = new Date();
-        const h = String(d.getHours()).padStart(2, '0');
-        const m = String(d.getMinutes()).padStart(2, '0');
-        return `${h}:${m}`;
-    }
-
-    const hideWelcome = ()=>{
-        if (welcomeEl && !welcomeEl.classList.contains('hidden')) {
-            welcomeEl.classList.add('hidden');
-        }
-    }
-
-    const addMessage = (role, text)=>{
-        hideWelcome();
-
-        const wrap = document.createElement('div');
-        wrap.className = `message ${role}`;
-
-        const avatar = document.createElement('div');
-        avatar.className = 'message-avatar';
-        avatar.textContent = role === 'user' ? 'U' : 'S';
-
-        const bubble = document.createElement('div');
-        bubble.className = 'message-bubble';
-        bubble.innerHTML = escapeHtml(text).replace(/\n/g, '<br>');
-
-        const time = document.createElement('div');
-        time.className = 'message-time';
-        time.textContent = nowTime();
-
-        wrap.appendChild(avatar);
-        wrap.appendChild(bubble);
-        wrap.appendChild(time);
-
-        // Insert messages before typing indicator so typing appears at bottom
-        if (typingEl && typingEl.classList.contains('show')) {
-            messagesEl.insertBefore(wrap,popupEl);
-        } else {;
-            messagesEl.append(wrap, typingEl );
-            messagesEl.append(popupEl);
-        }
-        messagesEl.scrollTop = messagesEl.scrollHeight;
-    }
 
     const setTyping = (on)=>{
         if (!typingEl) return ;

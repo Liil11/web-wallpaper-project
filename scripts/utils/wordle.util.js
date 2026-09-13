@@ -1,41 +1,6 @@
-const popupEl = document.getElementById('popup');
-const nowTime= ()=>{
-        const d = new Date();
-        const h = String(d.getHours()).padStart(2, '0');
-        const m = String(d.getMinutes()).padStart(2, '0');
-        return `${h}:${m}`;
-    }
+import { addMessage } from './syschat.util.js';
+import  { nowTime }  from './time.util.js';
     
-const addmessage = (content)=>{
-    const typingEl = document.getElementById('typing');
-    const messagesEl = document.getElementById('messages');
-    
-    const wrap = document.createElement('div');
-    wrap.className = 'message bot';
-    
-    const avatar = document.createElement('div');
-    avatar.className = 'message-avatar';
-    avatar.textContent = 'S';
-    
-    const bubble = document.createElement('div');
-    bubble.className = 'message-bubble';
-    bubble.innerText = `${content}`;
-    const time = document.createElement('div')
-    time.className = 'message-time'
-    time.textContent = nowTime(); 
-    wrap.appendChild(avatar);
-    wrap.appendChild(bubble);
-    wrap.appendChild(time);
-    
-    if (typingEl && typingEl.classList.contains('show')) {
-            messagesEl.insertBefore(wrap,typingEl);
-    } else {
-            messagesEl.append(wrap, typingEl);
-            messagesEl.append(popupEl);
-        }
-        messagesEl.scrollTop = messagesEl.scrollHeight;
-    }
-
     export const addWordle = async () => {
         // 1. Hapus container Wordle lama jika ada
     if (document.querySelector('.wordle-container')) {
@@ -163,7 +128,7 @@ const addmessage = (content)=>{
         tiles.forEach(tile => guess += tile.textContent);
 
         if (guess.length !== 5) {
-            addmessage("Kata harus terdiri dari 5 huruf!");
+            addMessage('bot',"Kata harus terdiri dari 5 huruf!");
             return;
         }
 
@@ -213,10 +178,10 @@ const addmessage = (content)=>{
         // Cek Status Menang / Kalah
         if (guess === targetWord) {
             gameOver = true;
-            addmessage(`Selamat! Kamu berhasil memecahkan Wordle NYT hari ini (${todayStr}) dalam ${currentRow + 1} percobaan!`);
+            addMessage('bot',`Selamat! Kamu berhasil memecahkan Wordle NYT hari ini (${todayStr}) dalam ${currentRow + 1} percobaan!`);
         } else if (currentRow === 5) {
             gameOver = true;
-            addmessage(`Kesempatan habis! Kata NYT hari ini adalah **${targetWord}**.`);
+            addMessage('bot',`Kesempatan habis! Kata NYT hari ini adalah **${targetWord}**.`);
         } else {
             currentRow++;
             currentTile = 0;
