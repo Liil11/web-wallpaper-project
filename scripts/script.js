@@ -2,7 +2,8 @@
 import { functionMap } from "./map/function.map.js";
 import { firstGreeting, updateClock, nowTime } from "./utils/time.util.js";
 import { addMessage } from "./utils/syschat.util.js";
-(() => {
+import { testThis } from "./utils/a.test.util.js";
+
     'use strict';
 
     //element camelCase 
@@ -146,6 +147,8 @@ import { addMessage } from "./utils/syschat.util.js";
     })
     // Theme toggle functionality
     const themeToggle = document.getElementById('theme-toggle');
+    const availableTheme = ['theme-dark','theme-light'];
+    const themeNumber = availableTheme.length;
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
             const body = document.body;
@@ -158,11 +161,12 @@ import { addMessage } from "./utils/syschat.util.js";
             }
         });
     }
-
     // Set default theme on load
     document.body.classList.add('theme-dark');
 
     // Friendly initial state
     if (welcomeEl) welcomeEl.classList.remove('hidden');
     inputEl.focus();
-});
+
+    
+    testThis();
