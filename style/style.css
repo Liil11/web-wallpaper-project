@@ -66,8 +66,8 @@ body{
 }
 
 .chat-container{
-    max-width:500px;
-    width : 70vh;
+    max-width:auto;
+    width : 50vw;
     height:85vh;
     background: var(--glass-background);
     backdrop-filter: blur(10px);
@@ -96,14 +96,16 @@ body{
     border-radius: 24px 24px 0 0;
 }
 .theme-toggle{
+    position:absolute;
+    top: 2%;
+    right: 2%;
     border-radius: 50%;
     height: 26px;
     width: 26px;
     margin-left: 15%;
     margin-bottom: 10%;
-    border: 2px solid black;
-    align-self: flex-end;
-    position: relative;
+    border: 1px solid black;
+    align-self: center;
     display: flex;
     transition: transform 0.5s ease;
 }
