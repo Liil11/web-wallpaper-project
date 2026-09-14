@@ -151,6 +151,7 @@ import { testThis } from "./utils/a.test.util.js";
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
             const body = document.body;
+            themeToggle.classList.toggle('rotate')
             if (body.classList.contains('theme-dark')) {
                 body.classList.replace('theme-dark', 'theme-light');
             } else if (body.classList.contains('theme-light')) {

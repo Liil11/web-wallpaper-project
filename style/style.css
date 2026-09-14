@@ -105,9 +105,13 @@ body{
     align-self: flex-end;
     position: relative;
     display: flex;
+    transition: transform 0.5s ease;
 }
 .theme-toggle :active{
     animation: push 0.5s ease-in-out;
+}
+.theme-toggle.rotate{
+    transform: rotate(90deg);
 }
 
 @keyframes push {
