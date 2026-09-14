@@ -148,7 +148,6 @@ import { testThis } from "./utils/a.test.util.js";
     // Theme toggle functionality
     const themeToggle = document.getElementById('theme-toggle');
     const availableTheme = ['theme-dark','theme-light'];
-    const themeNumber = availableTheme.length;
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
             const body = document.body;
