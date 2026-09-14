@@ -25,8 +25,10 @@ export const updateClock=()=>{
     const timeString = `${day}, ${date} ${month} :: 🕰️ ${hours}:${minutes}:${seconds}`;
 
     document.getElementById('clock').textContent = timeString
-
+    //resetlocalstorage
+    if(Number(hours)===0) localStorage.clear;
 }
+
 
 export const firstGreeting = ()=>{
     const d = time().getHours();

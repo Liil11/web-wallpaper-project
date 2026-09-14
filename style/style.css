@@ -33,6 +33,8 @@ body.theme-dark {
     --text-main: black;
     --text-muted: rgba(165, 12, 120, 0.523);
     --svg-color: rgb(237, 237, 237);
+    --svg-toggle:rgb(255, 158, 195);
+
 }
 
 /* Light/Ocean Theme (New) */
@@ -48,6 +50,7 @@ body.theme-light {
     --text-main: #004d40;
     --text-muted: rgba(0, 77, 64, 0.6);
     --svg-color: rgb(25, 42, 42);
+    --svg-toggle:rgb(157, 227, 255);
 }
 
 .svg{
@@ -100,19 +103,21 @@ body{
     top: 2%;
     right: 2%;
     border-radius: 50%;
-    height: 26px;
-    width: 26px;
+    height: 27px;
+    width: 27px;
     margin-left: 15%;
     margin-bottom: 10%;
     border: 1px solid black;
     align-self: center;
+    justify-content: center;
+    align-items: center;
     display: flex;
     transition: transform 0.5s ease;
 }
 .theme-toggle :active{
     animation: push 0.5s ease-in-out;
 }
-.theme-toggle.rotate{
+.rotate{
     transform: rotate(90deg);
 }
 
@@ -326,11 +331,15 @@ body{
     align-items: center;
     justify-content: center;
     transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(94, 12, 61, 0.399)
 }
 
-.send-btn:hover{
+.blimp:hover{
     transform: scale(1.5s);
+    background: var(--svg-color);
+    .svg{
+        fill: var(--svg-toggle);
+        stroke: var(--svg-toggle);
+    }
 }
 
 .typing-dots span{
@@ -397,10 +406,16 @@ body{
     margin-right: 1%;
     background: var(--background);
     color: white;
-    border-color: white;
+    border: none;
+    transition: 0.5s;
 }
 /*tictactoe board
 */
+.blimp:active{
+    transform: scale(80%);
+    transition: 0.3s ease-in-out;
+}
+
 .tictactoe-container{
     display: grid;
     grid-template-columns: repeat(3, 48px);

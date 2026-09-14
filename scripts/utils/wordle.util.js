@@ -30,7 +30,7 @@ import  { nowTime }  from './time.util.js';
         </div>
         <div class="wordle-keyboard">
         <div class="kb-row">
-                    ${['Q','W','E','R','T','Y','U','I','O','P'].map(k => `<button class="key">${k}</button>`).join('')}
+                ${['Q','W','E','R','T','Y','U','I','O','P'].map(k => `<button class="key">${k}</button>`).join('')}
                 </div>
                 <div class="kb-row">
                 ${['A','S','D','F','G','H','J','K','L'].map(k => `<button class="key">${k}</button>`).join('')}
@@ -74,15 +74,18 @@ import  { nowTime }  from './time.util.js';
     const proxyUrl = `https://proxy.corsfix.com/?url=${encodeURIComponent(nytUrl)}`;
     console.log(todayStr);
     try {
-        const res = await fetch(proxyUrl);
-        if (res.ok) {
-            const data = await res.json();
-            await new Promise(resolve=> setTimeout(resolve, 2000));
-            if (data && data.solution) {
-                targetWord = data.solution.toUpperCase();
-                console.log("NYT Solution Loaded");
+        if(!localStorage.getItem('wordle')){
+            const res = await fetch(proxyUrl);
+            if (res.ok) {
+                const data = await res.json();
+                await new Promise(resolve=> setTimeout(resolve, 2000));
+                if (data && data.solution) {
+                    targetWord = data.solution.toUpperCase();
+                    localStorage.setItem('wordle', targetWord);
+                    console.log("NYT Solution Loaded");
+                }
             }
-        }
+        } targetWord = localStorage.getItem('wordle')
     } catch (e) {
         console.warn("Gagal fetch NYT API, menggunakan fallback word:", e);
     }
@@ -192,4 +195,9 @@ import  { nowTime }  from './time.util.js';
     document.querySelectorAll('.key').forEach(key => {
         key.addEventListener('click', () => handleKeyPress(key.textContent.trim()));
     });
+    
 };
+ export const add = (letter)=>{
+    addletter(letter);
+    console.log('thiswork')
+ }

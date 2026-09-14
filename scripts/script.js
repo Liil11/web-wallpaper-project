@@ -1,11 +1,9 @@
 
 import { functionMap } from "./map/function.map.js";
-import { firstGreeting, updateClock, nowTime } from "./utils/time.util.js";
+import { firstGreeting, updateClock } from "./utils/time.util.js";
 import { addMessage } from "./utils/syschat.util.js";
-import { testThis } from "./utils/a.test.util.js";
 
     'use strict';
-
     //element camelCase 
     const messagesEl = document.getElementById('messages');
     const welcomeEl   = document.getElementById('welcome');
@@ -14,13 +12,13 @@ import { testThis } from "./utils/a.test.util.js";
     const inputEl     = document.getElementById('input');
     const sendBtn     = document.getElementById('send');
     //maybe we don't need it, maybe we need,idk
-    const refreshBtn = document.getElementById('option-btn');
+    const popupBtn = document.getElementById('option-btn');
     const popupEl = document.getElementById('popup');
+
 
     firstGreeting();
     updateClock();
     setInterval(updateClock,1000);
-
     // Demo mode flag - set to false to use real API
     const DEMO_MODE = false;
     let prodMode = true;
@@ -63,15 +61,20 @@ import { testThis } from "./utils/a.test.util.js";
 
         if(message.toLowerCase().startsWith('/')){
             const query = message.toLowerCase().slice(1);
+            const funcVar = query.split(' ');
             try {
+                if(funcVar.length != 1){
+                    if(functionMap[funcVar[0]]){
+                        return functionMap[funcVar[0]](funcVar[1]);
+                    }
+                }
                 if(functionMap[query]){
                     return functionMap[query]();
-                } else {
-                    return `${query} is not a Function Fool!`
                 }
             } catch (error) {
-                return error.message;
+                console.log(error);
             }
+            
         }
         return 'have a good day!';
     }
@@ -108,7 +111,14 @@ import { testThis } from "./utils/a.test.util.js";
     
     // Suggestion chips
     document.querySelectorAll('.suggestion-chip').forEach(chip => {
-        chip.addEventListener('click', () => send(chip.dataset.text || chip.textContent));
+        
+        chip.addEventListener('click', () =>{ 
+            send(chip.dataset.text || chip.textContent);
+            if(popupEl.classList.contains('show') && popupBtn.classList.contains('rotate')){ 
+            popupEl.classList.toggle('show');
+            popupBtn.classList.toggle('rotate');
+        };
+        });
     });
 
     // Form submit (button + Enter)
@@ -141,8 +151,9 @@ import { testThis } from "./utils/a.test.util.js";
 
     //malah buat ini aku jir
     //popupmenu
-    refreshBtn.addEventListener('click',()=>{
+    popupBtn.addEventListener('click',()=>{
        popupEl.classList.toggle('show');
+       popupBtn.classList.toggle('rotate');
        messagesEl.scrollTop = messagesEl.scrollHeight;
     })
     // Theme toggle functionality
@@ -151,7 +162,7 @@ import { testThis } from "./utils/a.test.util.js";
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
             const body = document.body;
-            themeToggle.classList.toggle('rotate')
+            themeToggle.classList.toggle('rotate');
             if (body.classList.contains('theme-dark')) {
                 body.classList.replace('theme-dark', 'theme-light');
             } else if (body.classList.contains('theme-light')) {
@@ -169,4 +180,3 @@ import { testThis } from "./utils/a.test.util.js";
     inputEl.focus();
 
     
-    testThis();

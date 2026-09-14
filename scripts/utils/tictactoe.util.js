@@ -5,7 +5,8 @@ const popupEl = document.getElementById('popup')
 
 //time
 
-export const addTictactoe = (sys)=>{
+export const addTictactoe = (string)=>{
+    const side = string;
     if(document.querySelector('.tictactoe-container')){
         document.querySelector('.tictactoe-container').remove();
     }
@@ -51,13 +52,17 @@ export const addTictactoe = (sys)=>{
         [3, 4, 5],
         [6, 7, 8]
     ];
-    let turn = true;
+    let turn = string === 'second'? false: true;
+    let Uavatar = !turn ? 'X': 'O';
+    let Savatar = turn ? 'X': 'O'
+    if(!turn) 
+    console.log(side, turn);
     let t = document.querySelectorAll('.box');
     t.forEach((box)=>{
         box.addEventListener('click', ()=>{
             if(turn){
                 box.style.color = '#08519C'
-                box.innerText = 'O';
+                box.innerText = Uavatar;
                 box.disabled = true;
                 turn = false;
                 if (checkWinner() != true){
@@ -66,6 +71,7 @@ export const addTictactoe = (sys)=>{
             }
         })
     })
+    
     const disableBoxes = () => {
         for (let box of t) {
             box.disabled = true;
@@ -77,7 +83,7 @@ export const addTictactoe = (sys)=>{
             let pos1Val = t[pattern[0]].innerText;
             let pos2Val = t[pattern[1]].innerText;
             let pos3Val = t[pattern[2]].innerText;
-
+            
             if (pos1Val !== "" && pos2Val!=="" && pos3Val!=="" 
                 && pos1Val === pos2Val && pos2Val === pos3Val) {
                 hasWin = true;
@@ -101,27 +107,27 @@ export const addTictactoe = (sys)=>{
         const emptyBox = box.filter(box => !box.disabled);
         
         if(emptyBox === 0 ) return;
-
+        
         const typing = document.getElementById('typing');
         typing.classList.toggle('show', true)
         messagesEl.scrollTop = messagesEl.scrollHeight;
         await new Promise(resolve => setTimeout(resolve, 500))
         typing.classList.toggle('show', false)
         let choice;
-
-        choice = getW('X', box);
-
+        
+        choice = getW(Savatar, box);
+        
         if(!choice){
-            choice = getW('O', box);
+            choice = getW(Uavatar, box);
         }
-
+        
         if(!choice){
             const center = box[4];
             if(!center.disabled){
                 choice = center;
             }
         }
-
+        
         if(!choice){
             const corner = [box[0],box[2],box[6],box[8]].filter(box => !box.disabled);
             if(corner.length > 0){
@@ -134,14 +140,14 @@ export const addTictactoe = (sys)=>{
         }
         
         if(choice != undefined){
-            choice.textContent = 'X';
+            choice.textContent = Savatar;
             choice.style.color = '#FA003F'
             choice.disabled = true;
             checkWinner();
             turn = true;
         }
     }
-     const getW = (side, boxes)=>{
+    const getW = (side, boxes)=>{
         for (let combo of winPatterns){
             const [a,b,c] = combo;
             const values = [
@@ -153,11 +159,18 @@ export const addTictactoe = (sys)=>{
                 const emptyBoxes = combo[
                     values.findIndex(value => value === '')
                 ];
-
+                
                 return boxes[emptyBoxes];
             }
         }
         return;
     }   
+    if(!turn){
+        try{
+            opponentMoves();
+        } catch (e){
+            console.log(e);
+        }
+    };
     
 }

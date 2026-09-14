@@ -1,8 +1,9 @@
-//to test any util here
-import { circularLinkedList } from "../class/circularLL.class.js"
-let LL = new circularLinkedList();
+import { add } from "./wordle.util.js";
 
 
-
-export const testThis = ()=>{
+export const submitWord = (string)=>{
+    const word = [...string.toUpperCase()];
+    for(let letter of word){
+        console.log(letter);
+    }
 }
