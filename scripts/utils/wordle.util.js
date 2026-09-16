@@ -1,7 +1,7 @@
 import { addMessage } from './syschat.util.js';
-import  { nowTime }  from './time.util.js';
-    
+import  { nowTime }  from './time.util.js'; 
     export const addWordle = async () => {
+        
         // 1. Hapus container Wordle lama jika ada
     if (document.querySelector('.wordle-container')) {
         document.querySelector('.wordle-container').remove();
@@ -71,7 +71,7 @@ import  { nowTime }  from './time.util.js';
     const todayStr = `${yyyy}-${mm}-${dd}`;
 
     const nytUrl = `https://www.nytimes.com/svc/wordle/v2/${todayStr}.json`;
-    const proxyUrl = `https://proxy.corsfix.com/?url=${encodeURI(nytUrl)}`;
+    const proxyUrl = `https://proxy.corsfix.com/?${nytUrl}`;
     console.log(todayStr);
     try {
         if(localStorage.getItem('date') !== dd){
