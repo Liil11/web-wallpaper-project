@@ -74,7 +74,7 @@ import  { nowTime }  from './time.util.js';
     const proxyUrl = `https://proxy.corsfix.com/?url=${encodeURIComponent(nytUrl)}`;
     console.log(todayStr);
     try {
-        if(!localStorage.getItem('wordle')){
+        if(localStorage.getItem('date') !== dd){
             const res = await fetch(proxyUrl);
             if (res.ok) {
                 const data = await res.json();
@@ -82,6 +82,7 @@ import  { nowTime }  from './time.util.js';
                 if (data && data.solution) {
                     targetWord = data.solution.toUpperCase();
                     localStorage.setItem('wordle', targetWord);
+                    localStorage.setItem('date', dd );
                     console.log("NYT Solution Loaded");
                 }
             }
