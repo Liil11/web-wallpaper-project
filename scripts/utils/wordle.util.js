@@ -71,12 +71,11 @@ import  { nowTime }  from './time.util.js';
     const todayStr = `${yyyy}-${mm}-${dd}`;
 
     const nytUrl = `https://www.nytimes.com/svc/wordle/v2/${todayStr}.json`;
-    //not secure not recommended
-    // const proxyUrl = `https://proxy.corsfix.com/?url=${encodeURIComponent(nytUrl)}`;
+    const proxyUrl = `https://proxy.corsfix.com/?url=${encodeURI(nytUrl)}`;
     console.log(todayStr);
     try {
         if(localStorage.getItem('date') !== dd){
-            const res = await fetch(nytUrl, {
+            const res = await fetch(proxyUrl, {
                 method: 'GET',
             });
             if (res.ok) {
