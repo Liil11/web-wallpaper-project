@@ -76,7 +76,9 @@ import  { nowTime }  from './time.util.js';
     console.log(todayStr);
     try {
         if(localStorage.getItem('date') !== dd){
-            const res = await fetch(nytUrl);
+            const res = await fetch(nytUrl, {
+                method: 'GET',
+            });
             if (res.ok) {
                 const data = await res.json();
                 await new Promise(resolve=> setTimeout(resolve, 2000));
