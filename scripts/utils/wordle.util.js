@@ -77,6 +77,10 @@ import  { nowTime }  from './time.util.js';
         if(localStorage.getItem('date') !== dd){
             const res = await fetch(proxyUrl, {
                 method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*"
+                }
             });
             if (res.ok) {
                 const data = await res.json();
