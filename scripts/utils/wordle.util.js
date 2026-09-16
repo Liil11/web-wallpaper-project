@@ -71,15 +71,12 @@ import  { nowTime }  from './time.util.js';
     const todayStr = `${yyyy}-${mm}-${dd}`;
 
     const nytUrl = `https://www.nytimes.com/svc/wordle/v2/${todayStr}.json`;
-    const proxyUrl = `https://proxy.corsfix.com/?${nytUrl}`;
+    const proxyUrl = `https://proxy.corsfix.com/?url=${encodeURIComponent(nytUrl)}`;
     console.log(todayStr);
     try {
         if(localStorage.getItem('date') !== dd){
             const res = await fetch(proxyUrl, {
                 method: 'GET',
-                headers: {
-                    'X-Games-Auth-Bypass':true,
-                }
             });
             if (res.ok) {
                 const data = await res.json();
