@@ -60,7 +60,7 @@ export const addWordle = async () => {
     messagesEl.scrollTop = messagesEl.scrollHeight;
 
     // 3. Mengambil Wordle Resmi NYT via CORS Proxy
-    let targetWord = "THETA"; // Default fallback
+    let targetWord = "PILAF"; // Default fallback
     
     // Format tanggal lokal hari ini ke YYYY-MM-DD
     const d = new Date();
@@ -73,17 +73,27 @@ export const addWordle = async () => {
     const proxyUrl = `https://proxy.corsfix.com/?url=${encodeURIComponent(nytUrl)}`;
 
     try {
-        const res = await fetch(proxyUrl);
-        if (res.ok) {
-            const data = await res.json();
+        if(localStorage.getItem('date')!= dd){
+            let res = await fetch(proxyUrl);
+            let data;
+            if (res.ok) {
+                console.log("NYT Solution Loaded");
+                data = await res.json();
+            } else {
+                res = await fetch('../storage/wordle.json');
+                data = await res.json();
+                console.log('Backend Solution Loaded')
+            }
             if (data && data.solution) {
                 targetWord = data.solution.toUpperCase();
-                console.log("NYT Solution Loaded");
+                localStorage.setItem('date', dd);
+                localStorage.setItem('wordle', targetWord);
             }
         }
+        
     } catch (e) {
         console.warn("Gagal fetch NYT API, menggunakan fallback word:", e);
-    }
+    } 
 
     // 4. Logika Game Wordle
     let currentRow = 0;
