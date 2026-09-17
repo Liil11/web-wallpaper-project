@@ -76,11 +76,11 @@ export const addWordle = async () => {
         if(localStorage.getItem('date')!= dd){
             let res = await fetch(proxyUrl);
             let data;
-            if (res.ok) {
+            if (!res.ok) {
                 console.log("NYT Solution Loaded");
                 data = await res.json();
             } else {
-                res = await fetch('../storage/wordle.json');
+                res = await fetch('scripts/storage/wordle.json');
                 data = await res.json();
                 console.log('Backend Solution Loaded')
             }
