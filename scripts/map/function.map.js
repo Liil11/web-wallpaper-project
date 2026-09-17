@@ -2,6 +2,7 @@ import { time } from "../utils/time.util.js";
 import { addTictactoe } from "../utils/tictactoe.util.js";
 import { addWordle } from "../utils/wordle.util.js";
 import { submitWord } from "../utils/a.test.util.js";
+import { greeting } from "../storage/initialized.js";
 
 const functionMap ={
     time: function(){return time()},
@@ -15,7 +16,8 @@ const functionMap ={
         return ` ${string} is not the right Length, you tryna kill me or make me bored?`;
     }
     submitWord(string); return `${string} is submitted`;
-    }
+    },
+    greeting: ()=>{ return greeting;}
 }
 //tambahin wordle
 export { functionMap};

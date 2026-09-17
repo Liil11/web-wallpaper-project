@@ -75,13 +75,7 @@ import  { nowTime }  from './time.util.js';
     console.log(todayStr);
     try {
         if(localStorage.getItem('date') !== dd){
-            const res = await fetch(proxyUrl, {
-                method: 'GET',
-                headers: {
-                    "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin": "*"
-                }
-            });
+            const res = await fetch(proxyUrl);
             if (res.ok) {
                 const data = await res.json();
                 await new Promise(resolve=> setTimeout(resolve, 2000));
@@ -93,8 +87,20 @@ import  { nowTime }  from './time.util.js';
                 }
             }
         } targetWord = localStorage.getItem('wordle')
+        
     } catch (e) {
         console.warn("Gagal fetch NYT API, menggunakan fallback word:", e);
+        if(localStorage.getItem('date') !== dd){
+            const res = await fetch('../scripts/storage/wordle.json');
+            const data = await res.json();
+            await new Promise(resolve=> setTimeout(resolve, 2000));
+            if (data && data.solution) {
+            targetWord = data.solution.toUpperCase();
+            localStorage.setItem('wordle', targetWord);
+            localStorage.setItem('date', dd );
+            console.log("NYT Solution Loaded");
+            } 
+        }
     }
 
     // 4. Logika Game Wordle
