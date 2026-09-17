@@ -60,7 +60,7 @@ export const addWordle = async () => {
     messagesEl.scrollTop = messagesEl.scrollHeight;
 
     // 3. Mengambil Wordle Resmi NYT via CORS Proxy
-    let targetWord = "CATER"; // Default fallback
+    let targetWord = "THETA"; // Default fallback
     
     // Format tanggal lokal hari ini ke YYYY-MM-DD
     const d = new Date();
