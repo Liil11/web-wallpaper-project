@@ -61,7 +61,7 @@ import  { nowTime }  from './time.util.js';
                 messagesEl.scrollTop = messagesEl.scrollHeight;
                 
                 // 3. Mengambil Wordle Resmi NYT via CORS Proxy
-                let targetWord = "CATER"; // Default fallback
+                let targetWord = "PILAF"; // Default fallback
                 
     // Format tanggal lokal hari ini ke YYYY-MM-DD
     const d = new Date();
