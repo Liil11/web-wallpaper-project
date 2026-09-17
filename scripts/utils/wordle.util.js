@@ -83,6 +83,8 @@ export const addWordle = async () => {
                 res = await fetch('scripts/storage/wordle.json');
                 data = await res.json();
                 console.log('Backend Solution Loaded')
+                //testing add new comment
+                
             }
             if (data && data.solution) {
                 targetWord = data.solution.toUpperCase();
