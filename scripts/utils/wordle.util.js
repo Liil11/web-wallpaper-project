@@ -126,7 +126,7 @@ export const addWordle = async () => {
         tiles.forEach(tile => guess += tile.textContent);
 
         if (guess.length !== 5) {
-            addmessage("Kata harus terdiri dari 5 huruf!");
+            addMessage("Kata harus terdiri dari 5 huruf!");
             return;
         }
 
@@ -176,10 +176,10 @@ export const addWordle = async () => {
         // Cek Status Menang / Kalah
         if (guess === targetWord) {
             gameOver = true;
-            addmessage(`Selamat! Kamu berhasil memecahkan Wordle NYT hari ini (${todayStr}) dalam ${currentRow + 1} percobaan!`);
+            addMessage(`Selamat! Kamu berhasil memecahkan Wordle NYT hari ini (${todayStr}) dalam ${currentRow + 1} percobaan!`);
         } else if (currentRow === 5) {
             gameOver = true;
-            addmessage(`Kesempatan habis! Kata NYT hari ini adalah **${targetWord}**.`);
+            addMessage(`Kesempatan habis! Kata NYT hari ini adalah **${targetWord}**.`);
         } else {
             currentRow++;
             currentTile = 0;
