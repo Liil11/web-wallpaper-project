@@ -85,11 +85,12 @@ export const addWordle = async () => {
                 console.log('Backend Solution Loaded')
             }
             if (data && data.solution) {
-                targetWord = data.solution.toUpperCase();
+                wordWordle = data.solution.toUpperCase();
                 localStorage.setItem('date', dd);
-                localStorage.setItem('wordle', targetWord);
+                localStorage.setItem('wordle', wordWordle);
             }
         }
+        targetWord = localStorage.getItem('wordle');
         
     } catch (e) {
         console.warn("Gagal fetch NYT API, menggunakan fallback word:", e);
