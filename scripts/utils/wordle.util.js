@@ -77,15 +77,15 @@ export const addWordle = async () => {
             let res = await fetch(proxyUrl);
             let data;
             if (res.ok) {
-                console.log("NYT Solution Loaded");
-                data = await res.json();
+                console.log('getting NYT solution')
+                data = await res.json()
             } else {
-                res = await fetch('scripts/storage/wordle.json');
+                console.log('getting backend solution')
+                res = await fetch('./scripts/storage/wordle.json')
                 data = await res.json();
-                console.log('Backend Solution Loaded')
             }
             if (data && data.solution) {
-                wordWordle = data.solution.toUpperCase();
+                let wordWordle = data.solution.toUpperCase();
                 localStorage.setItem('date', dd);
                 localStorage.setItem('wordle', wordWordle);
             }
@@ -187,10 +187,10 @@ export const addWordle = async () => {
         // Cek Status Menang / Kalah
         if (guess === targetWord) {
             gameOver = true;
-            addMessage(`Selamat! Kamu berhasil memecahkan Wordle NYT hari ini (${todayStr}) dalam ${currentRow + 1} percobaan!`);
+            addMessage('bot',`Selamat! Kamu berhasil memecahkan Wordle NYT hari ini (${todayStr}) dalam ${currentRow + 1} percobaan!`);
         } else if (currentRow === 5) {
             gameOver = true;
-            addMessage(`Kesempatan habis! Kata NYT hari ini adalah **${targetWord}**.`);
+            addMessage('bot', `Kesempatan habis! Kata NYT hari ini adalah **${targetWord}**.`);
         } else {
             currentRow++;
             currentTile = 0;
