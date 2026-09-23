@@ -93,7 +93,7 @@ export const addWordle = async () => {
         targetWord = localStorage.getItem('wordle');
         
     } catch (e) {
-        console.warn("Gagal fetch NYT API, menggunakan fallback word:", e);
+        console.warn("Gagal fetch NYT API, menggunakan fallback word, Error:", e);
     } 
 
     // 4. Logika Game Wordle
